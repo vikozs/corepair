@@ -1,0 +1,47 @@
+# corepair pricing input
+#
+# THIS FILE CONTAINS NO REAL PRICES AND NEVER WILL.
+#
+# Vendor pricing is confidential, contract-specific, and changes. A figure
+# copied from someone else's repository is worse than no figure, because it
+# looks authoritative. Replace every REPLACE_ME with the number from your own
+# quote. corepair refuses to run while the placeholders are still here.
+
+currency: EUR
+discount_rate_pct: 5.0        # your cost of capital, for NPV
+
+models:
+  core_pair:
+    unit: core_pair
+    sku: ""                   # e.g. the SKU on your quote
+    list_price: REPLACE_ME    # per core-pair, per year, list
+    vcpu_per_unit: 4          # 1 core-pair = 2 cores = 4 vCPU
+    notes: "Virtual model. Counts worker nodes only; rounding is per node."
+
+  bare_metal:
+    unit: bare_metal
+    sku: ""
+    list_price: REPLACE_ME    # per node, per year, list
+    max_cores_per_unit:       # leave blank if your entitlement has no core cap
+    notes: >
+      Per-node model. Cheaper only at high core density per node - work out
+      your own break-even with `corepair cost` rather than assuming it.
+
+terms:
+  1y:
+    years: 1
+    discount_pct: REPLACE_ME          # negotiated discount, year 1
+    annual_list_growth_pct: 0.0       # ASSUMPTION: leave 0 unless you have evidence
+    renewal_discount_pct:             # ASSUMPTION: blank = same discount at renewal
+
+  3y:
+    years: 3
+    discount_pct: REPLACE_ME
+    annual_list_growth_pct: 0.0
+    prepaid: false
+
+# On the two assumption fields above: they are the difference between a
+# forecast and a contract. If your vendor's business case leans on assumed
+# list-price growth or a worse renewal discount, ask them to commit to the
+# opposite in writing. `corepair cost` reports exactly how much of the headline
+# saving depends on them.

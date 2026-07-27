@@ -1,0 +1,56 @@
+# Migration plan input for `corepair plan`.
+#
+# Waves are cumulative and evaluated in order: each row of the output is the
+# capacity you need in place *by* that wave. That is also when you should be
+# buying it - which is the whole argument against a single up-front purchase
+# sized for a build-out three years away.
+
+node_shape:
+  name: worker
+  vcpu: 8
+  memory_gib: 32
+
+waves:
+  - name: "wave-1 (pilot, 2026 H2)"
+    applications:
+      - name: orders-api
+        namespace: orders
+        replicas: 3
+        cpu_m: 500          # request as planned
+        memory_mib: 2048
+        cpu_usage_m: 120    # measured p95, if you have a comparable workload
+        memory_usage_mib: 1400
+      - name: partner-gateway
+        namespace: partners
+        replicas: 2
+        cpu_m: 1000
+        memory_mib: 4096
+        cpu_usage_m: 180
+        memory_usage_mib: 2600
+
+  - name: "wave-2 (core systems, 2027)"
+    applications:
+      - name: rules-engine
+        namespace: core
+        replicas: 4
+        cpu_m: 2000
+        memory_mib: 8192
+        cpu_usage_m: 350
+        memory_usage_mib: 5200
+      - name: document-store
+        namespace: docs
+        replicas: 2
+        cpu_m: 1000
+        memory_mib: 4096
+        cpu_usage_m: 90
+        memory_usage_mib: 3100
+
+  - name: "wave-3 (remainder, 2028)"
+    applications:
+      - name: reporting
+        namespace: bi
+        replicas: 2
+        cpu_m: 2000
+        memory_mib: 16384
+        cpu_usage_m: 400
+        memory_usage_mib: 11000
