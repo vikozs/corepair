@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "corepair"
+version = "0.1.0"
+description = "Measure real Kubernetes/OpenShift demand and turn it into a defensible subscription count"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "Apache-2.0" }
+keywords = ["openshift", "kubernetes", "finops", "licensing", "capacity-planning", "rightsizing"]
+authors = [{ name = "vikozs" }]
+
+[project.urls]
+Homepage = "https://github.com/vikozs/corepair"
+Source = "https://github.com/vikozs/corepair"
+Issues = "https://github.com/vikozs/corepair/issues"
+dependencies = ["PyYAML>=6.0", "requests>=2.31", "openpyxl>=3.1"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0"]
+
+[project.scripts]
+corepair = "corepair.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
